@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Versículo Diário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            width: 400px;
+            margin: auto;
+        }
+        #versiculo {
+            font-size: 18px;
+            margin-top: 20px;
+            white-space: pre-line;
+            min-height: 50px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Versículo do Dia</h2>
+        <input type="text" id="nome" placeholder="Digite seu nome" />
+        <button onclick="gerarVersiculo()">Gerar Versículo</button>
+        <p id="versiculo" class="hidden"></p>
+        <p id="mensagem" class="hidden"></p>
+    </div>
+    <script>
+        const versiculos = [
+            "Josué 1:9 – Não fui eu que lhe ordenei? Seja forte e corajoso!...",
+            "Isaías 40:31 – Mas aqueles que esperam no Senhor renovam as suas forças...",
+            "Filipenses 4:13 – Tudo posso naquele que me fortalece.",
+            "1 Timóteo 4:12 – Ninguém o despreze pelo fato de você ser jovem...",
+            "Jeremias 29:11 – Porque sou eu que conheço os planos que tenho para vocês...",
+            "Salmos 139:14 – Eu te louvo porque me fizeste de modo especial e admirável...",
+            "Provérbios 17:17 – O amigo ama em todos os momentos; é um irmão na adversidade.",
+            "1 Coríntios 15:33 – Não se deixem enganar: ‘As más companhias corrompem os bons costumes’.",
+            "Provérbios 13:20 – Quem anda com os sábios será cada vez mais sábio...",
+            "Mateus 6:34 – Portanto, não se preocupem com o amanhã...",
+            "1 Pedro 5:7 – Lancem sobre ele toda a sua ansiedade...",
+            "Salmos 55:22 – Entregue suas preocupações ao Senhor..."
+        ];
+
+        function digitarTexto(elemento, texto, intervalo = 50) {
+            elemento.classList.remove("hidden");
+            elemento.textContent = "";
+            let i = 0;
+            function escrever() {
+                if (i < texto.length) {
+                    elemento.textContent += texto[i];
+                    i++;
+                    setTimeout(escrever, intervalo);
+                }
+            }
+            escrever();
+        }
+
+        function gerarVersiculo() {
+            const nome = document.getElementById("nome").value.trim();
+            if (!nome) {
+                alert("Por favor, digite seu nome.");
+                return;
+            }
+            const versiculoEscolhido = versiculos[Math.floor(Math.random() * versiculos.length)];
+            const mensagem = `\nJesus te ama, ${nome} ✝️ 🙏!`;
+
+            digitarTexto(document.getElementById("versiculo"), versiculoEscolhido);
+            setTimeout(() => digitarTexto(document.getElementById("mensagem"), mensagem), versiculoEscolhido.length * 50);
+        }
+    </script>
+</body>
+</html>
